@@ -1,8 +1,52 @@
 import React from 'react';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 function Testimonial(props) {
+  let tarminal ={
+    autoplay: true,
+    smartSpeed: 2000,
+    center: false,
+    dots: true,
+    loop: true,
+    margin: 25,
+    nav : true,
+    navText : [
+        '<div class = "owl-prev"><i class="bi bi-arrow-left"></i></div>',
+        '<div class = "owl-next"><i class="bi bi-arrow-right"></i></div>'
+    ],
+    responsiveClass: true,
+    responsive: {
+        0:{
+            items:1
+        },
+        576:{
+            items:1
+        },
+        768:{
+            items:1
+        },
+        992:{
+            items:2
+        },
+        1200:{
+            items:2
+        }
+    }
+}
     return (
     <div>
+         {/* Single Page Header start */}
+<div className="container-fluid page-header py-5">
+  <h1 className="text-center text-white display-6">Testimonial</h1>
+  <ol className="breadcrumb justify-content-center mb-0">
+    <li className="breadcrumb-item"><a href="#">Home</a></li>
+    <li className="breadcrumb-item"><a href="#">Pages</a></li>
+    <li className="breadcrumb-item active text-white">Testimonial</li>
+  </ol>
+</div>
+
   {/* Tastimonial Start */}
   <div className="container-fluid testimonial py-5">
     <div className="container py-5">
@@ -10,7 +54,7 @@ function Testimonial(props) {
         <h4 className="text-primary">Our Testimonial</h4>
         <h1 className="display-5 mb-5 text-dark">Our Client Saying!</h1>
       </div>
-      <div className="owl-carousel testimonial-carousel">
+      <OwlCarousel {...tarminal} className="owl-carousel testimonial-carousel">
         <div className="testimonial-item img-border-radius bg-light rounded p-4">
           <div className="position-relative">
             <i className="fa fa-quote-right fa-2x text-secondary position-absolute" style={{bottom: 30, right: 0}} />
@@ -86,7 +130,7 @@ function Testimonial(props) {
             </div>
           </div>
         </div>
-      </div>
+      </OwlCarousel>
     </div>
   </div>
   {/* Tastimonial End */}
