@@ -8,4 +8,4 @@ function Product(props) {
     );
 }
 
-export default Product;
+export default Product
