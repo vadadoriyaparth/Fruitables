@@ -5,11 +5,11 @@
             "name": "Grapes",
             "desciption": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
             "pirce": 4.99,
-            "image": "img/fruite-item-2.jpg"
+            "image": "img/fruite-item-5.jpg"
         },
         {
             "id": "2",
-            "name": "Raspberries",
+            "name": "Orange",
             "desciption": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
             "pirce": 4.99,
             "image": "img/fruite-item-1.jpg"
@@ -30,14 +30,14 @@
         },
         {
             "id": "5",
-            "name": "Grapes",
+            "name": "Orange",
             "desciption": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
             "pirce": 4.99,
             "image": "img/fruite-item-1.jpg"
         },
         {
             "id": "6",
-            "name": "Grapes",
+            "name": "Raspberries",
             "desciption": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
             "pirce": 4.99,
             "image": "img/fruite-item-2.jpg"
@@ -51,14 +51,14 @@
         },
         {
             "id": "8",
-            "name": "Grapes",
+            "name": "Orange",
             "desciption": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
             "pirce": 4.99,
             "image": "img/fruite-item-1.jpg"
         },
         {
             "id": "9",
-            "name": "Grapes",
+            "name": "Raspberries",
             "desciption": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
             "pirce": 4.99,
             "image": "img/fruite-item-2.jpg"
