@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -6,29 +6,69 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { object, string } from 'yup';
 import { useFormik } from 'formik';
+import { object, string } from 'yup';
+import { DataGrid } from '@mui/x-data-grid';
+import { json } from 'react-router-dom';
 
-export default function FormDialog() {
-    const CategorySchema = object({
-        name: string().required(),
-        description: string().required().min(5, "At least 5 characters long."),
+function Category(props) {
+    const [data, setData] = useState([]);
+
+    const getData = () => {
+        const localData = JSON.parse(localStorage.getItem("category"));
+        if (localData) {
+            setData(localData);
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+
+
+
+    let categorySchema = object({
+        category: string().required("Category is required").matches(/^[a-zA-Z'-\s]*$/, 'Invalid name'),
+        description: string().required("Description is required").min(10, "Must be at least 10 characters"),
     });
+
+    const handleAdd = (data) => {
+        console.log(data);
+        let localData = JSON.parse(localStorage.getItem("category"));
+
+       let rfn = Math.floor(Math.random() * 1000);
+
+        if (localData) {
+            localData.push({...data,id:rfn});
+            localStorage.setItem("category", JSON.stringify(localData));
+        } else {
+            localStorage.setItem("category", JSON.stringify([{...data ,id:rfn}]));
+        }
+getData();
+
+    }
+
 
     const formik = useFormik({
         initialValues: {
-            name: '',
+            category: '',
             description: '',
         },
-        validationSchema: CategorySchema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
+        validationSchema: categorySchema,
+        onSubmit: async (values, { resetForm }) => {
+            handleAdd(values);
+            resetForm();
+            handleClose();
+        }
     });
 
-    const { handleSubmit, handleChange, handleBlur, errors, touched, values } = formik;
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
     const [open, setOpen] = React.useState(false);
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -36,65 +76,85 @@ export default function FormDialog() {
 
     const handleClose = () => {
         setOpen(false);
+
     };
+    const columns = [
+        { field: 'category', headerName: 'Category', width: 130 },
+        { field: 'description', headerName: ' Description', width: 130 },
+    ]
+
+
+
+
+
 
     return (
-        <React.Fragment>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open form dialog
-            </Button>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-            >
-                <form onSubmit={handleSubmit}>
-                    <DialogTitle>Subscribe</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            To subscribe to this website, please enter your email address here. We
-                            will send updates occasionally.
-                        </DialogContentText>
-                        <TextField
-                            autoFocus
-                            required
-                            margin="dense"
-                            id="name"
-                            name="name"
-                            label="Product Name"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            value={values.name}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
+        <div>
+            <h1>Category Page</h1>
+            <React.Fragment>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    Add Category
+                </Button>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
 
-                        />
-                        <span className='errorMessage' style={{ color: 'red' }}>{errors.name && touched.name ? errors.name : ''}</span><br />
+                >
+                    <form onSubmit={handleSubmit}>
+                        <DialogTitle>Category</DialogTitle>
+                        <DialogContent>
+                            <TextField
+                                margin="dense"
+                                id="category"
+                                name="category"
+                                label="Category Name"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.category}
+                                error={errors.category && touched.category ? errors.category : false}
+                                helperText={errors.category && touched.category ? errors.category : ''}
+                            />
+                            <TextField
+                                margin="dense"
+                                id="description"
+                                name="description"
+                                label="Description"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.description}
+                                error={errors.description && touched.description ? errors.description : false}
+                                helperText={errors.description && touched.description ? errors.description : ''}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleClose}>Cancel</Button>
+                            <Button type="submit">Add</Button>
+                        </DialogActions>
+                    </form>
+                </Dialog>
+            </React.Fragment>
 
-                        <TextField
-                            autoFocus
-                            required
-                            margin="dense"
-                            id="description"
-                            name="description"
-                            label="Enter description"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            value={values.description}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-
-                        />
-                        <span className='errorMessage' style={{ color: 'red' }}>{errors.description && touched.description ? errors.description : ''}</span><br />
-
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button type="submit">Subscribe</Button>
-                    </DialogActions>
-                </form>
-            </Dialog>
-        </React.Fragment>
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={data}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 5 },
+                        },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                />
+            </div>
+        </div>
     );
 }
+
+export default Category;
