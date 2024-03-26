@@ -1,74 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useFormik } from 'formik';
 import { object, string } from 'yup';
+import { useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
-import { json } from 'react-router-dom';
+import { DeleteOutline, Update } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Category(props) {
-    const [data, setData] = useState([]);
+    const [open, setOpen] = React.useState(false);
+    const [data, setdata] = React.useState([]);
+    const [edit, setedit] = React.useState(null);
 
-    const getData = () => {
-        const localData = JSON.parse(localStorage.getItem("category"));
-        if (localData) {
-            setData(localData);
+    const getdata = () => {
+        let data = JSON.parse(localStorage.getItem('category'));
+
+        if (data) {
+            setdata(data);
         }
     }
 
     useEffect(() => {
-        getData();
+        getdata();
     }, []);
-
-
-
-
-    let categorySchema = object({
-        category: string().required("Category is required").matches(/^[a-zA-Z'-\s]*$/, 'Invalid name'),
-        description: string().required("Description is required").min(10, "Must be at least 10 characters"),
-    });
-
-    const handleAdd = (data) => {
-        console.log(data);
-        let localData = JSON.parse(localStorage.getItem("category"));
-
-       let rfn = Math.floor(Math.random() * 1000);
-
-        if (localData) {
-            localData.push({...data,id:rfn});
-            localStorage.setItem("category", JSON.stringify(localData));
-        } else {
-            localStorage.setItem("category", JSON.stringify([{...data ,id:rfn}]));
-        }
-getData();
-
-    }
-
-
-    const formik = useFormik({
-        initialValues: {
-            category: '',
-            description: '',
-        },
-        validationSchema: categorySchema,
-        onSubmit: async (values, { resetForm }) => {
-            handleAdd(values);
-            resetForm();
-            handleClose();
-        }
-    });
-
-
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
-
-    const [open, setOpen] = React.useState(false);
-
-
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -76,66 +34,156 @@ getData();
 
     const handleClose = () => {
         setOpen(false);
-
+        formik.resetForm();
+        setedit(null);
     };
+
+    let categorySchema = object({
+        category: string().required().matches(/^[a-zA-Z'-\s]*$/, 'Invalid name').min(2, 'use a valid name').max(15, 'use a valid name'),
+        discription: string().required().min(10, 'Message is 10 word')
+    });
+
+    const handaladd = (data) => {
+        let localdata = JSON.parse(localStorage.getItem('category'));
+        let rNo = Math.floor(Math.random() * 1000) + 1;
+
+        if (localdata) {
+            localdata.push({ ...data, id: rNo });
+            localStorage.setItem('category', JSON.stringify(localdata));
+        } else {
+            localStorage.setItem('category', JSON.stringify([{ ...data, id: rNo }]));
+        }
+
+        getdata();
+    }
+
+    const Deletelocal = (id) => {
+
+        const Delete = data.filter(v => v.id !== id);
+        localStorage.setItem('category', JSON.stringify(Delete));
+        setdata(Delete);
+    }
+
+    const editlocal = (data) => {
+        formik.setValues(data);
+        setOpen(true);
+        setedit(data.id);
+        // const Edit = data.filter(item => item.id === id);
+        // localStorage.setItem('category', JSON.stringify(Edit));
+    }
+
+    const handalupadte = (data) => {
+
+        let localdata = JSON.parse(localStorage.getItem('category'));
+
+
+        let indx = localdata.findIndex(v => v.id === data.id);
+        console.log(indx);
+
+        localdata[indx] = data;
+        localStorage.setItem('category', JSON.stringify(localdata));
+
+        getdata();
+    }
+
+    const formik = useFormik({
+        initialValues: {
+            category: '',
+            discription: '',
+        },
+        validationSchema: categorySchema,
+        onSubmit: (values, { resetForm }) => {
+            resetForm();
+            handleClose();
+            // handaladd(values);
+
+            if (edit) {
+                handalupadte(values);
+            } else {
+                handaladd(values);
+            }
+        },
+    });
+
     const columns = [
         { field: 'category', headerName: 'Category', width: 130 },
-        { field: 'description', headerName: ' Description', width: 130 },
-    ]
+        { field: 'discription', headerName: 'Description', width: 130 },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 200,
+            renderCell: (params) => (
+                <>
+                    <Button
+                        onClick={() => editlocal(params.row)}
+                        startIcon={<EditIcon />}
+                    >
 
+                    </Button>
+                    <Button
+                        onClick={() => Deletelocal(params.row.id)}
+                        startIcon={<DeleteOutline />}
+                    >
+                    </Button>
+                </>
 
+            ),
+        },
+    ];
 
-
-
+    const { handleSubmit, handleChange, handleBlur, errors, values, touched } = formik;
 
     return (
-        <div>
-            <h1>Category Page</h1>
+        <>
             <React.Fragment>
-                <Button variant="outlined" onClick={handleClickOpen}>
-                    Add Category
-                </Button>
+                <div className='m-4 mx-5 d-flex justify-content-end'>
+                    <Button variant="outlined" color='primary' onClick={handleClickOpen}>
+                        Add Category
+                    </Button>
+                </div>
+
                 <Dialog
                     open={open}
                     onClose={handleClose}
-
                 >
+                    <DialogTitle className='text-center'>Add Category</DialogTitle>
                     <form onSubmit={handleSubmit}>
-                        <DialogTitle>Category</DialogTitle>
-                        <DialogContent>
-                            <TextField
-                                margin="dense"
-                                id="category"
-                                name="category"
-                                label="Category Name"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.category}
-                                error={errors.category && touched.category ? errors.category : false}
-                                helperText={errors.category && touched.category ? errors.category : ''}
-                            />
-                            <TextField
-                                margin="dense"
-                                id="description"
-                                name="description"
-                                label="Description"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.description}
-                                error={errors.description && touched.description ? errors.description : false}
-                                helperText={errors.description && touched.description ? errors.description : ''}
-                            />
+                        <DialogContent style={{ width: 500 }}>
+                            <div>
+                                <TextField
+                                    margin="dense"
+                                    name="category"
+                                    label="Enter category"
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.category}
+                                    error={errors.category && touched.category ? true : false}
+                                    helperText={errors.category && touched.category ? errors.category : ''}
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    margin="dense"
+                                    name="discription"
+                                    label="Enter category description"
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.discription}
+                                    error={errors.discription && touched.discription ? true : false}
+                                    helperText={errors.discription && touched.discription ? errors.discription : ''}
+                                />
+                            </div>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Cancel</Button>
+                                <Button type="submit">{edit ? 'Edit' : 'Add'}</Button>
+                            </DialogActions>
                         </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleClose}>Cancel</Button>
-                            <Button type="submit">Add</Button>
-                        </DialogActions>
                     </form>
                 </Dialog>
             </React.Fragment>
@@ -144,16 +192,11 @@ getData();
                 <DataGrid
                     rows={data}
                     columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
-                        },
-                    }}
-                    pageSizeOptions={[5, 10]}
+                    pageSize={5}
                     checkboxSelection
                 />
             </div>
-        </div>
+        </>
     );
 }
 
