@@ -1,4 +1,4 @@
-import { ADD_FESELLITY, DELETE_FESELLITY } from "../AcationType";
+import { ADD_FESELLITY, DELETE_FESELLITY, EDIT_FESELLITY } from "../AcationType";
 
 const inistialState = {
     isLodaing : false,
@@ -24,6 +24,18 @@ export const FacilitesReducer = (state=inistialState,action) => {
             facilites : state.facilites.filter((v)=>v.id !== action.payload)
         }
     
+        case EDIT_FESELLITY:
+
+        return {
+            ...state,
+            facilites : state.facilites.map((v)=>{
+                if (v.id === action.payload.id) {
+                    return action.payload
+                }else{
+                    return v;
+                }
+            })
+        }
         default:
            return state
     }

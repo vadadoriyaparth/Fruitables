@@ -8,15 +8,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { object, string, number, date, InferType } from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { delete_data, facilites_data } from '../../../redux/action/fesellity.action';
+import { delete_data, edite_data, facilites_data } from '../../../redux/action/fesellity.action';
 import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-
+import EditIcon from '@mui/icons-material/Edit';
 
 function Facilites(props) {
     const [open, setOpen] = React.useState(false);
+    const [Update, setUpdate] = React.useState(false);
+
     const dispatch = useDispatch()
 
     const handleClickOpen = () => {
@@ -25,6 +26,8 @@ function Facilites(props) {
 
     const handleClose = () => {
         setOpen(false);
+        formik.resetForm(true);
+        setUpdate(false)
     };
 
     let facilitesSchema = object({
@@ -41,7 +44,12 @@ function Facilites(props) {
 
         onSubmit: (values, { resetForm }) => {
             const rNo = Math.floor((Math.random()) * 1000);
-            dispatch(facilites_data({ ...values, id: rNo }));
+            if (Update) {
+                dispatch(edite_data(values));
+            } else {
+                dispatch(facilites_data({ ...values, id: rNo }));
+            }
+         
             resetForm();
             handleClose();
         },
@@ -49,10 +57,17 @@ function Facilites(props) {
 
     const { handleBlur, handleChange, handleSubmit, errors, values, touched } = formik
 
-const handledelete = (id) =>{
-console.log(id);
-dispatch(delete_data(id))
-}
+    const handledelete = (id) => {
+        console.log(id);
+        dispatch(delete_data(id))
+    }
+    const handledite = (data) => {
+        console.log(data);
+        setOpen(true);
+        formik.setValues(data);
+        setUpdate(true);
+
+    }
     const facilites = useSelector(state => state.facilites)
     console.log(facilites);
     const columns = [
@@ -64,9 +79,15 @@ dispatch(delete_data(id))
             headerName: 'action',
             width: 130,
             renderCell: (params) => (
-                <IconButton aria-label="delete" size="large" onClick={()=>handledelete(params.row.id)}>
-                    <DeleteIcon />
-                </IconButton>
+                <>
+                    <IconButton aria-label="delete" size="large" onClick={() => handledelete(params.row.id)}>
+                        <DeleteIcon />
+                    </IconButton>
+                    <IconButton aria-label="edite" size="large" onClick={() => handledite(params.row)}>
+                        <EditIcon />
+                    </IconButton>
+                </>
+
             )
         },
     ];
@@ -115,7 +136,7 @@ dispatch(delete_data(id))
 
 
                             <Button onClick={handleClose}>Cancel</Button>
-                            <Button type="submit">Add</Button>
+                            <Button type="submit">{ Update ? 'Update' : 'Add'}</Button>
                         </DialogActions>
                     </DialogContent>
                 </form>
