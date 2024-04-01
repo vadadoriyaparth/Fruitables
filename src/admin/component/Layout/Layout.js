@@ -94,6 +94,8 @@ const adminlink = [
     {title:"products",icon:<AppleIcon />, to: "/admin/Product"},
     {title:"Reviews",icon:<RateReviewIcon />, to: "/admin/Reviews"},
     {title:"Category",icon:<CategoryIcon />, to: "/admin/Category"},
+    {title:"Fesellity",icon:<CategoryIcon />, to: "/admin/Fesellity"},
+
 
 
 ]
