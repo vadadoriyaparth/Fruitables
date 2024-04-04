@@ -9,10 +9,9 @@ import { Provider } from 'react-redux';
 import { storeReduces } from '../redux/Store';
 
 function AdminRoutes(props) {
-   const store = storeReduces()
     return (
 
-            <Provider store={store}>
+          
             <Layout>
              <Routes>
                 <Route exact path="/Product" element={<Product />}/>
@@ -22,7 +21,6 @@ function AdminRoutes(props) {
 
              </Routes>
              </Layout>
-             </Provider>
        
     );
 }

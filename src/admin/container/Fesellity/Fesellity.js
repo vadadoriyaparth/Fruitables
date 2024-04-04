@@ -18,6 +18,7 @@ function Facilites(props) {
     const [open, setOpen] = React.useState(false);
     const [Update, setUpdate] = React.useState(false);
 
+    
     const dispatch = useDispatch()
 
     const handleClickOpen = () => {
@@ -94,7 +95,13 @@ function Facilites(props) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            {
+                facilites.isLodaing ? <p>isLodaing...................
+                    
+                </p>
+                 :
+                <>
+                  <Button variant="outlined" onClick={handleClickOpen}>
                 Add Facilites
             </Button>
             <Dialog
@@ -154,6 +161,9 @@ function Facilites(props) {
                     checkboxSelection
                 />
             </div>
+                </>
+            }
+          
         </div>
     );
 }
