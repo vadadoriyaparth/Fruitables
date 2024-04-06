@@ -12,5 +12,6 @@ export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 export const LODAING_PRODUCT = 'LODAING_PRODUCT'
 export const GET_PRODUCT = 'GET_PRODUCT'
 
+export const GET_SHOP= 'GET_SHOP'
 
-
+export const GET_SHOPDETAILS= 'GET_SHOPDETAILS'

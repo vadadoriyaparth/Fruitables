@@ -63,5 +63,35 @@
             "price": 4.99,
             "image": "img/fruite-item-2.jpg"
         }
+    ],
+    "reviews":[
+        {
+            "productId":1,
+            "name":"parth",
+            "email":"parth@gmail.com",
+            "review":"Good Products",
+            "rating":3
+        },
+        {
+            "productId":2,
+            "name":"dhaval",
+            "email":"dhaval@gmail.com",
+            "review":"Good Products",
+            "rating":5
+        },
+        {
+            "productId":3,
+            "name":"ketan",
+            "email":"ketan@gmail.com",
+            "review":"Good Products",
+            "rating":2
+        },
+        {
+            "productId":4,
+            "name":"ansh",
+            "email":"ansh@gmail.com",
+            "review":"Good Products",
+            "rating":1
+        }
     ]
 }

@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getdatashop } from '../../../redux/action/shop.action';
+
 
 function Shop(props) {
   const [fruitedata, setFruitedata] = useState([]);
   const [search, setSerch] = useState('');
+  const dispatch=useDispatch()
+  const shop = useSelector(state=>state.shop);
+  console.log(shop);
   const [categorie, setCategory] = useState([]);
 
 
 
   // console.log(search);
-  const getdata = async () => {
-    const respons = await fetch('http://localhost:8000/frutits');
-    const data = await respons.json();
-    let cat=[...new Set(data.map((v)=>v.name))];
-    setFruitedata(data);
-    setCategory(cat)
-    // setSerch(data)
+  // const getdata = async () => {
+  //   const respons = await fetch('http://localhost:8000/Products');
+  //   const data = await respons.json();
+  //   let cat=[...new Set(data.map((v)=>v.name))];
+  //   setFruitedata(data);
+  //   setCategory(cat)
+  //   // setSerch(data)
  
-  }
+  // }
   useEffect(() => {
-    getdata();
+    dispatch(getdatashop());
   }, []);
 
   const handleFilter = () => {
@@ -194,8 +201,7 @@ function Shop(props) {
 
                   <div className="row g-4 justify-content-center">
                     {
-                      fData.map((v, i) => (
-
+                      shop.shop.map((v, i) => (
                         <div className="col-md-6 col-lg-6 col-xl-4">
                           <Link to={`/Shop/${v.id}`}>
                             <div className="rounded position-relative fruite-item">
@@ -205,9 +211,9 @@ function Shop(props) {
                               <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                               <div className="p-4 border border-secondary border-top-0 rounded-bottom">
                                 <h4>{v.name}</h4>
-                                <p>{v.desciption}</p>
+                                <p>{v.description}</p>
                                 <div className="d-flex justify-content-between flex-lg-wrap">
-                                  <p className="text-dark fs-5 fw-bold mb-0">${v.pirce} / kg</p>
+                                  <p className="text-dark fs-5 fw-bold mb-0">${v.price} / kg</p>
                                   <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
                                 </div>
                               </div>
