@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, GET_PRODUCT } from "../AcationType";
+import { ADD_PRODUCT, GET_PRODUCT, LODAING_PRODUCT } from "../AcationType";
 
 const initialState = {
     isLoding:false,
@@ -10,13 +10,20 @@ export const  productsReducer = (state = initialState , action) => {
 console.log(action);
 
     switch (action.type) {
-        case GET_PRODUCT:
+        case LODAING_PRODUCT:
+            console.log("loding......");
             return{
-                isLoding:false,
-                products:action.payload,
-                error:null
+                ...state,
+                isLoding:true,
+              
             }
-    
+            case GET_PRODUCT:
+                return{
+                    isLoding:false,
+                    products:action.payload,
+                    error:null
+                }
+        
         default:
             return state;
     }

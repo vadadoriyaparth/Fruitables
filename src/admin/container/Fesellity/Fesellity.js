@@ -96,7 +96,7 @@ function Facilites(props) {
     return (
         <div>
             {
-                facilites.isLodaing ? <p>isLodaing...................
+                facilites.isLoding ? <p>isLoding...................
                     
                 </p>
                  :

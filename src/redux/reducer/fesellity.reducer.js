@@ -1,7 +1,7 @@
 import { ADD_FESELLITY, DELETE_FESELLITY, EDIT_FESELLITY, GET_FESELLITY, LODAING_FESELLITY } from "../AcationType";
 
 const inistialState = {
-    isLodaing : false,
+    isLoding : false,
     facilites : [],
     error : null
 }
