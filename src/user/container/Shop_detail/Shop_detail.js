@@ -516,7 +516,7 @@ function Shop_detail(props) {
         <p>{v.review}</p>
         <p>{v.rating}</p>
 
-
+        
         </>
         
       ))
