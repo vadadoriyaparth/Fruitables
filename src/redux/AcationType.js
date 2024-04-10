@@ -11,6 +11,8 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 export const LODAING_PRODUCT = 'LODAING_PRODUCT'
 export const GET_PRODUCT = 'GET_PRODUCT'
+export const ERROR_PRODUCT = 'ERROR_PRODUCT'
+
 
 export const GET_SHOP= 'GET_SHOP'
 

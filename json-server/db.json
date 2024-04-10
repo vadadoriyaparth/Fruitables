@@ -1,97 +1,115 @@
 {
-    "Products": [
-        {
-            "id": "1",
-            "name": "Grapes",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-5.jpg"
-        },
-        {
-            "id": "2",
-            "name": "Orange",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-1.jpg"
-        },
-        {
-            "id": "3",
-            "name": "Apricots",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-4.jpg"
-        },
-        {
-            "id": "4",
-            "name": "Banana",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-3.jpg"
-        },
-        {
-            "id": "5",
-            "name": "Orange",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-1.jpg"
-        },
-        {
-            "id": "6",
-            "name": "Raspberries",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-2.jpg"
-        },
-        {
-            "id": "7",
-            "name": "Grapes",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-5.jpg"
-        },
-        {
-            "id": "8",
-            "name": "Orange",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-1.jpg"
-        },
-        {
-            "id": "9",
-            "name": "Raspberries",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-            "price": 4.99,
-            "image": "img/fruite-item-2.jpg"
-        }
-    ],
-    "reviews":[
-        {
-            "productId":1,
-            "name":"parth",
-            "email":"parth@gmail.com",
-            "review":"Good Products",
-            "rating":3
-        },
-        {
-            "productId":2,
-            "name":"dhaval",
-            "email":"dhaval@gmail.com",
-            "review":"Good Products",
-            "rating":5
-        },
-        {
-            "productId":3,
-            "name":"ketan",
-            "email":"ketan@gmail.com",
-            "review":"Good Products",
-            "rating":2
-        },
-        {
-            "productId":4,
-            "name":"ansh",
-            "email":"ansh@gmail.com",
-            "review":"Good Products",
-            "rating":1
-        }
-    ]
+  "Products": [
+    {
+      "id": "1",
+      "name": "Grapes",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-5.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Orange",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-1.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Apricots",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-4.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Banana",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-3.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Orange",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-1.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Raspberries",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-2.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Grapes",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-5.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Orange",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-1.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Raspberries",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
+      "price": 4.99,
+      "image": "img/fruite-item-2.jpg"
+    },
+    {
+      "id": "bad7",
+      "name": "vdsv",
+      "description": "vawgewfefewf",
+      "price": 100,
+      "image": ""
+    },
+    {
+      "id": "848c",
+      "name": "Parth vadadoriya ",
+      "description": "appel",
+      "price": 100,
+      "image": ""
+    }
+  ],
+  "reviews": [
+    {
+      "productId": 1,
+      "name": "parth",
+      "email": "parth@gmail.com",
+      "review": "Good Products",
+      "rating": 3,
+      "id": "fdf4"
+    },
+    {
+      "productId": 2,
+      "name": "dhaval",
+      "email": "dhaval@gmail.com",
+      "review": "Good Products",
+      "rating": 5,
+      "id": "9146"
+    },
+    {
+      "productId": 3,
+      "name": "ketan",
+      "email": "ketan@gmail.com",
+      "review": "Good Products",
+      "rating": 2,
+      "id": "3740"
+    },
+    {
+      "productId": 4,
+      "name": "ansh",
+      "email": "ansh@gmail.com",
+      "review": "Good Products",
+      "rating": 1,
+      "id": "b9d0"
+    }
+  ]
 }

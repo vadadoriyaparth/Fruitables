@@ -10,11 +10,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { object, string, number, date, InferType } from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../../redux/action/product.action';
+import { DeleteProducts, EditeProducts, addProducts, getProducts } from '../../../redux/action/product.action';
+import { DeleteOutline, Update } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
+import { useState } from 'react';
+import { DELETE_PRODUCT } from '../../../redux/AcationType';
+
 
 
 export default function Product() {
     const [open, setOpen] = React.useState(false);
+    const [Update, setUpdate] = useState(false)
+
     const dispatch = useDispatch()
     const products = useSelector(state => state.products);
     console.log(products);
@@ -29,6 +36,7 @@ export default function Product() {
 
     const handleClose = () => {
         setOpen(false);
+        formik.resetForm(true);
     };
 
     let productSchema = object({
@@ -37,6 +45,18 @@ export default function Product() {
         price: number().required().positive(),
         // image: string().required()
     });
+
+
+    const handleedite = (data) => {
+        formik.setValues(data);
+        setOpen(true);
+        setUpdate(true);
+      
+    }
+    const handledelete = (id) => {
+        dispatch(DeleteProducts(id))
+        // {type:DELETE_PRODUCT,payload:response.data}
+    }
 
 
     const formik = useFormik({
@@ -48,20 +68,45 @@ export default function Product() {
         },
         validationSchema: productSchema,
         onSubmit: (values, { resetForm }) => {
+
+            if (Update) {
+                dispatch(EditeProducts(values))
+            } else {
+                dispatch(addProducts(values))
+            }
             resetForm();
             handleClose();
         },
     });
 
-
     const { handleSubmit, handleChange, handleBlur, values, touched, errors } = formik;
 
+// console.log(errors);
     const columns = [
         { field: 'name', headerName: 'Name', width: 70 },
         { field: 'description', headerName: 'description', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
-        // { field: 'image', headerName: 'Image', width: 130 },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 200,
+            renderCell: (params) => (
+                <>
+                    <Button
+                        onClick={() => handleedite(params.row)}
+                        startIcon={<EditIcon />}
+                    >
 
+                    </Button>
+                    <Button
+                        onClick={() => handledelete(params.row.id)}
+                        startIcon={<DeleteOutline />}
+                    >
+                    </Button>
+                </>
+
+            ),
+        },
     ];
 
 
@@ -103,17 +148,17 @@ export default function Product() {
 
                                  <TextField
                                      margin="dense"
-                                     id="desciption"
-                                     name="desciption"
-                                     label="Product desciption"
+                                     id="description"
+                                     name="description"
+                                     label="Product description"
                                      type="text"
                                      fullWidth
                                      variant="standard"
                                      onChange={handleChange}
                                      onBlur={handleBlur}
-                                     value={values.desciption}
-                                     error={errors.desciption && touched.desciption ? true : false}
-                                     helperText={errors.desciption && touched.desciption ? errors.desciption : ''}
+                                     value={values.description}
+                                     error={errors.description && touched.description ? true : false}
+                                     helperText={errors.description && touched.description ? errors.description : ''}
                                  />
 
                                  <TextField
@@ -148,7 +193,7 @@ export default function Product() {
 
                                  <DialogActions>
                                      <Button onClick={handleClose}>Cancel</Button>
-                                     <Button type="submit">Add</Button>
+                                     <Button type="submit">{ Update ? 'Update' : 'Add'}</Button>
                                  </DialogActions>
 
                              </DialogContent>

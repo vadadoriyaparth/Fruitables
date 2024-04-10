@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from 'axios'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { getdatashop } from '../../../redux/action/shop.action';
 
@@ -46,7 +46,7 @@ function Shop(props) {
           <div className="row g-4">
             <div className="col-lg-12">
               <div className="row g-4">
-                <div className="col-xl-3">
+                <div className="col-xl-3">  
                   <div className="input-group w-100 mx-auto d-flex">
                     <input type="search" onChange={(event) => setSerch(event.target.value)} className="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1"
                       
