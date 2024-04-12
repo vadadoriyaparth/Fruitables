@@ -76,40 +76,21 @@
       "description": "appel",
       "price": 100,
       "image": ""
+    },
+    {
+      "id": "b238",
+      "name": "Parth vadadoriya ",
+      "description": "vdsvdsvdsvsdvevevd",
+      "price": 7000,
+      "image": ""
     }
   ],
   "reviews": [
     {
-      "productId": 1,
-      "name": "parth",
-      "email": "parth@gmail.com",
-      "review": "Good Products",
-      "rating": 3,
-      "id": "fdf4"
-    },
-    {
-      "productId": 2,
-      "name": "dhaval",
-      "email": "dhaval@gmail.com",
-      "review": "Good Products",
-      "rating": 5,
-      "id": "9146"
-    },
-    {
-      "productId": 3,
-      "name": "ketan",
-      "email": "ketan@gmail.com",
-      "review": "Good Products",
-      "rating": 2,
-      "id": "3740"
-    },
-    {
-      "productId": 4,
-      "name": "ansh",
-      "email": "ansh@gmail.com",
-      "review": "Good Products",
-      "rating": 1,
-      "id": "b9d0"
+      "id": "8430",
+      "name": "Parth vadadoriya vdsdvd",
+      "email": "parthvadadoriya317@gmail.com",
+      "review": "swdefghj"
     }
   ]
 }

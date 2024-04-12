@@ -175,6 +175,7 @@ function Shop_detail(props) {
                     </div>
                   </div>
                 </div>
+                
                 <form action="#">
                   <h4 className="mb-5 fw-bold">Leave a Reply</h4>
                   <div className="row g-4">

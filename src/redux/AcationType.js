@@ -17,3 +17,11 @@ export const ERROR_PRODUCT = 'ERROR_PRODUCT'
 export const GET_SHOP= 'GET_SHOP'
 
 export const GET_SHOPDETAILS= 'GET_SHOPDETAILS'
+
+export const ADD_REVIEW= 'ADD_REVIEW'
+export const DELETE_REVIEW = 'DELETE_REVIEW'
+export const EDIT_REVIEW = 'EDIT_REVIEW'
+export const LODAING_REVIEW = 'LODAING_REVIEW'
+export const GET_REVIEW= 'GET_REVIEW'
+export const ERROR_REVIEW = 'ERROR_REVIEW'
+

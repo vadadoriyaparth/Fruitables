@@ -11,6 +11,7 @@ import Testimonial from '../user/container/Page/Testimonial';
 import Contact from '../user/container/Contact/Contact';
 import Footer from '../user/component/Footer/Footer';
 import PrivateRoutes from './PrivateRoutes';
+import Review from '../user/container/Review/Review';
 
 function UserRoutes(props) {
     return (
@@ -29,6 +30,7 @@ function UserRoutes(props) {
                 <Route exact path="/Testimonial" element={<Testimonial />} />
                 <Route exact path="/Contect" element={<Contact />} />
                 <Route exact path="/Page" element={<Page />} />
+                <Route exact path="/Review" element={<Review />} />
                 </Route>
             
 
