@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getcart } from '../../../redux/action/cart.action';
 
 function Cart(props) {
+  const dispatch = useDispatch()
+  const cartdata=useSelector(state=>state.cart)
+    console.log(cartdata);
+
+    useEffect(() => {
+        dispatch(getcart())
+    }, [])
     return (
     <div>
       {/* Single Page Header start */}
@@ -16,7 +25,7 @@ function Cart(props) {
 */}
 
   {/* Cart Page Start */}
-  <div className="container-fluid py-5">
+  {/* <div className="container-fluid py-5">
     <div className="container py-5">
       <div className="table-responsive">
         <table className="table">
@@ -173,7 +182,47 @@ function Cart(props) {
         </div>
       </div>
     </div>
-  </div>
+  </div> */}
+  {
+                                    cartdata.cart.map((v,image)=>(
+                                        <tr>
+                                    <th scope="row">
+                                        <div className="d-flex align-items-center">
+                                            <img src={v.imgSrc} className="img-fluid me-5 rounded-circle" style={{ width: 80, height: 80 }} alt />
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <p className="mb-0 mt-4">{v.name}</p>
+                                    </td>
+                                    <td>
+                                        <p className="mb-0 mt-4">{v.price}</p>
+                                    </td>
+                                    <td>
+                                        <div className="input-group quantity mt-4" style={{ width: 100 }}>
+                                            <div className="input-group-btn">
+                                                <button className="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                    <i className="fa fa-minus" />
+                                                </button>
+                                            </div>
+                                            <input type="text" className="form-control form-control-sm text-center border-0" defaultValue={1} />
+                                            <div className="input-group-btn">
+                                                <button className="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                    <i className="fa fa-plus" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p className="mb-0 mt-4">2.99 $</p>
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-md rounded-circle bg-light border mt-4">
+                                            <i className="fa fa-times text-danger" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                    ))
+                                }
   {/* Cart Page End */}
 </div>
 

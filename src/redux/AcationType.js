@@ -25,3 +25,6 @@ export const LODAING_REVIEW = 'LODAING_REVIEW'
 export const GET_REVIEW= 'GET_REVIEW'
 export const ERROR_REVIEW = 'ERROR_REVIEW'
 
+export const ADD_CART = 'ADD_CART'
+export const GET_CART = 'GET_CART'
+
