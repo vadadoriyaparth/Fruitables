@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; 
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getdatashop } from '../../../redux/action/shop.action';
+import { getProducts } from '../../../redux/action/product.action';
+import { addToCart } from '../../../redux/slice/cart.slice';
 
 
 function Shop(props) {
   const [fruitedata, setFruitedata] = useState([]);
   const [search, setSerch] = useState('');
-  const dispatch=useDispatch()
-  const shop = useSelector(state=>state.shop);
-  console.log(shop);
+  const dispatch = useDispatch()
+  const products = useSelector(state => state.products);
+  console.log(products);
+
   const [categorie, setCategory] = useState([]);
 
 
@@ -23,18 +26,21 @@ function Shop(props) {
   //   setFruitedata(data);
   //   setCategory(cat)
   //   // setSerch(data)
- 
+
   // }
   useEffect(() => {
-    dispatch(getdatashop());
+    dispatch(getProducts());
   }, []);
 
+  const handleAdd = (id) => {
+    dispatch(addToCart(id))
+  }
   const handleFilter = () => {
-    let filteredData = fruitedata.filter((v) =>v.name.toLowerCase().includes(search.toLowerCase()));
+    let filteredData = fruitedata.filter((v) => v.name.toLowerCase().includes(search.toLowerCase()));
 
     return filteredData;
   }
-  
+
   const fData = handleFilter();
 
   return (
@@ -46,10 +52,10 @@ function Shop(props) {
           <div className="row g-4">
             <div className="col-lg-12">
               <div className="row g-4">
-                <div className="col-xl-3">  
+                <div className="col-xl-3">
                   <div className="input-group w-100 mx-auto d-flex">
                     <input type="search" onChange={(event) => setSerch(event.target.value)} className="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1"
-                      
+
                     />
                     <span id="search-icon-1" className="input-group-text p-3"><i className="fa fa-search" /></span>
                   </div>
@@ -71,25 +77,25 @@ function Shop(props) {
                 <div className="col-lg-3">
                   <div className="row g-4">
                     <div className="col-lg-12">
-                      <div className="mb-3"> 
+                      <div className="mb-3">
                         <h4>Categories</h4>
                         {
-                          categorie.map((n)=>(
+                          categorie.map((n) => (
                             <ul className="list-unstyled fruite-categorie">
-                            <li>
-                              <div className="d-flex justify-content-between fruite-name">
-                                <a href="#"><i className="fas fa-apple-alt me-2" />{n}</a>
-                                <span>
-                                  ({
-                                    fruitedata.filter((v)=>v.name === n).length
-                                  })
-                                </span>
-                              </div>
-                            </li>
-                          </ul>
+                              <li>
+                                <div className="d-flex justify-content-between fruite-name">
+                                  <a href="#"><i className="fas fa-apple-alt me-2" />{n}</a>
+                                  <span>
+                                    ({
+                                      fruitedata.filter((v) => v.name === n).length
+                                    })
+                                  </span>
+                                </div>
+                              </li>
+                            </ul>
                           ))
                         }
-                      
+
                       </div>
                     </div>
                     <div className="col-lg-12">
@@ -201,24 +207,35 @@ function Shop(props) {
 
                   <div className="row g-4 justify-content-center">
                     {
-                      shop.shop.map((v, i) => (
+                      products.products.map((v, i) => (
                         <div className="col-md-6 col-lg-6 col-xl-4">
-                          <Link to={`/Shop/${v.id}`}>
                             <div className="rounded position-relative fruite-item">
+                          <Link to={`/Shop/${v.id}`}>
+
                               <div className="fruite-img">
                                 <img src={v.image} className="img-fluid w-100 rounded-top" alt />
                               </div>
+                          </Link>
                               <div className="text-white bg-secondary px-3 py-1 rounded position-absolute" style={{ top: 10, left: 10 }}>Fruits</div>
                               <div className="p-4 border border-secondary border-top-0 rounded-bottom">
+                          <Link to={`/Shop/${v.id}`}>
+                                
                                 <h4>{v.name}</h4>
                                 <p>{v.description}</p>
+                          </Link>
+
                                 <div className="d-flex justify-content-between flex-lg-wrap">
+                          <Link to={`/Shop/${v.id}`}>
+
                                   <p className="text-dark fs-5 fw-bold mb-0">${v.price} / kg</p>
-                                  <a href="#" className="btn border border-secondary rounded-pill px-3 text-primary"><i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart</a>
-                                </div>
+                          </Link>
+
+                                  <button className="btn border border-secondary rounded-pill px-3 text-primary" onClick={() => handleAdd(v.id)}>
+                                    <i className="fa fa-shopping-bag me-2 text-primary" /> Add to cart
+                                  </button>                              
+                                    </div>
                               </div>
                             </div>
-                          </Link>
                         </div>
 
 
@@ -244,8 +261,8 @@ function Shop(props) {
             </div>
           </div>
         </div>
-      </div>
-      {/* Fruits Shop End*/}</div>
+      </div >
+      {/* Fruits Shop End*/}</div >
 
   );
 }

@@ -1,7 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Header(props) {
+  const cart = useSelector((state) => state.Addtocart);
+  console.log(cart);
+
+  const totalQty = cart.cart.reduce((acc, v) => acc + v.qyt, 0);
     return (
        <div>
   {/* Navbar start */}
@@ -45,7 +50,7 @@ function Header(props) {
             <button className="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i className="fas fa-search text-primary" /></button>
             <a href="#" className="position-relative me-4 my-auto">
               <i className="fa fa-shopping-bag fa-2x" />
-              <span className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style={{top: '-5px', left: 15, height: 20, minWidth: 20}}>3</span>
+              <NavLink to={"/Cart"} className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style={{top: '-5px', left: 15, height: 20, minWidth: 20}}>{totalQty}</NavLink>
             </a>
             <a href="#" className="my-auto">
               <i className="fas fa-user fa-2x" />
