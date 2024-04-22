@@ -96,9 +96,7 @@ const adminlink = [
     {title:"Category",icon:<CategoryIcon />, to: "/admin/Category"},
     {title:"Fesellity",icon:<CategoryIcon />, to: "/admin/Fesellity"},
     {title:"Counter",icon:<CategoryIcon />, to: "/admin/Counter"},
-
-
-
+    {title:"Coupan",icon:<CategoryIcon />, to: "/admin/Coupan"},
 
 ]
 

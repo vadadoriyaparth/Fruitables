@@ -8,6 +8,7 @@ import Fesellity from '../admin/container/Fesellity/Fesellity';
 import { Provider } from 'react-redux';
 import { storeReduces } from '../redux/Store';
 import Counter from '../admin/container/Counter/Counter';
+import Coupan from '../admin/container/Coupan/Coupan';
 
 function AdminRoutes(props) {
     return (
@@ -20,6 +21,8 @@ function AdminRoutes(props) {
                 <Route exact path="/Category" element={<Category />}/>
                 <Route exact path="/Fesellity" element={<Fesellity />}/>
                 <Route exact path="/Counter" element={<Counter />}/>
+                <Route exact path="/Coupan" element={<Coupan />}/>
+
 
 
              </Routes>

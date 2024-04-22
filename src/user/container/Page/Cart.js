@@ -22,8 +22,8 @@ function Cart(props) {
   const handelincrement = (id) => {
     console.log(id);
     dispatch(increment(id))
-
   }
+
   const handeldencrement =(id)=>{
     console.log(id);
     dispatch(decrement(id))
@@ -108,8 +108,6 @@ function Cart(props) {
                       </tr>
                     ))
                   }
-
-
                 </tbody>
               </table>
             </div>
