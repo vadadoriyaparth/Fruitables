@@ -148,10 +148,10 @@ function Shop_detail(props) {
                             <div className="col-6">
                               <div className="row bg-light align-items-center text-center justify-content-center py-2">
                                 <div className="col-6">
-                                  <p className="mb-0">Weight</p>
+                                  <h3 className="mb-0">Weight</h3>
                                 </div>
                                 <div className="col-6">
-                                  <p className="mb-0">1 kg</p>
+                                  <h3 className="mb-0">1 kg</h3>
                                 </div>
                               </div>
                               <div className="row text-center align-items-center justify-content-center py-2">
@@ -164,10 +164,10 @@ function Shop_detail(props) {
                               </div>
                               <div className="row bg-light text-center align-items-center justify-content-center py-2">
                                 <div className="col-6">
-                                  <p className="mb-0">Quality</p>
+                                  <h3 className="mb-0">Quality</h3>
                                 </div>
                                 <div className="col-6">
-                                  <p className="mb-0">Organic</p>
+                                  <h3 className="mb-0">Organic</h3>
                                 </div>
                               </div>
                               <div className="row text-center align-items-center justify-content-center py-2">
@@ -180,10 +180,10 @@ function Shop_detail(props) {
                               </div>
                               <div className="row bg-light text-center align-items-center justify-content-center py-2">
                                 <div className="col-6">
-                                  <p className="mb-0">Min Weight</p>
+                                  <h3 className="mb-0">Min Weight</h3>
                                 </div>
                                 <div className="col-6">
-                                  <p className="mb-0">250 Kg</p>
+                                  <h3 className="mb-0">250 Kg</h3>
                                 </div>
                               </div>
                             </div>

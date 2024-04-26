@@ -59,16 +59,16 @@ function Testimonial(props) {
           <div className="position-relative">
             <i className="fa fa-quote-right fa-2x text-secondary position-absolute" style={{bottom: 30, right: 0}} />
             <div className="mb-4 pb-4 border-bottom border-secondary">
-              <p className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-              </p>
+              <h3 className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+              </h3>
             </div>
             <div className="d-flex align-items-center flex-nowrap">
               <div className="bg-secondary rounded">
                 <img src="img/testimonial-1.jpg" className="img-fluid rounded" style={{width: 100, height: 100}} alt />
               </div>
               <div className="ms-4 d-block">
-                <h4 className="text-dark">Client Name</h4>
-                <p className="m-0 pb-3">Profession</p>
+                <h3 className="text-dark">Client Name</h3>
+                <h3 className="m-0 pb-3">Profession</h3>
                 <div className="d-flex pe-5">
                   <i className="fas fa-star text-primary" />
                   <i className="fas fa-star text-primary" />
@@ -84,16 +84,16 @@ function Testimonial(props) {
           <div className="position-relative">
             <i className="fa fa-quote-right fa-2x text-secondary position-absolute" style={{bottom: 30, right: 0}} />
             <div className="mb-4 pb-4 border-bottom border-secondary">
-              <p className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-              </p>
+              <h3 className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+              </h3>
             </div>
             <div className="d-flex align-items-center flex-nowrap">
               <div className="bg-secondary rounded">
                 <img src="img/testimonial-1.jpg" className="img-fluid rounded" style={{width: 100, height: 100}} alt />
               </div>
               <div className="ms-4 d-block">
-                <h4 className="text-dark">Client Name</h4>
-                <p className="m-0 pb-3">Profession</p>
+                <h3 className="text-dark">Client Name</h3>
+                <h3 className="m-0 pb-3">Profession</h3>
                 <div className="d-flex pe-5">
                   <i className="fas fa-star text-primary" />
                   <i className="fas fa-star text-primary" />
@@ -109,16 +109,16 @@ function Testimonial(props) {
           <div className="position-relative">
             <i className="fa fa-quote-right fa-2x text-secondary position-absolute" style={{bottom: 30, right: 0}} />
             <div className="mb-4 pb-4 border-bottom border-secondary">
-              <p className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-              </p>
+              <h3 className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+              </h3>
             </div>
             <div className="d-flex align-items-center flex-nowrap">
               <div className="bg-secondary rounded">
                 <img src="img/testimonial-1.jpg" className="img-fluid rounded" style={{width: 100, height: 100}} alt />
               </div>
               <div className="ms-4 d-block">
-                <h4 className="text-dark">Client Name</h4>
-                <p className="m-0 pb-3">Profession</p>
+                <h3 className="text-dark">Client Name</h3>
+                <h3 className="m-0 pb-3">Profession</h3>
                 <div className="d-flex pe-5">
                   <i className="fas fa-star text-primary" />
                   <i className="fas fa-star text-primary" />

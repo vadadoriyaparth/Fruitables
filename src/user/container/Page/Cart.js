@@ -1,38 +1,86 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment, removedata } from '../../../redux/slice/cart.slice';
+import { object, string } from 'yup';
+import { useFormik } from 'formik';
+import { applyCoupon, getcoupon } from '../../../redux/slice/coupan.slice';
 
 function Cart(props) {
+  const products = useSelector(state => state.products);
+  const cart = useSelector(state => state.Addtocart);
+  const coupan = useSelector(state => state.coupan);
 
-  const products = useSelector(state => state.products)
-  console.log(products);
+  const [discount, setDiscount] = useState(0);
 
-  const cart = useSelector(state => state.Addtocart)
-  console.log(cart);
-
-  const productdata = cart.cart.map((v, i) => {
-    // console.log(productdata);
-
+  const productdata = cart.cart.map((v) => {
     const product = products.products.find((v1) => v1.id === v.pid);
-
     return { ...product, qyt: v.qyt };
-  })
-  console.log(productdata);
-  const dispatch = useDispatch()
-  const handelincrement = (id) => {
-    console.log(id);
-    dispatch(increment(id))
-  }
+  });
 
-  const handeldencrement =(id)=>{
-    console.log(id);
-    dispatch(decrement(id))
-  }
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getcoupon());
+  }, []);
+
+  const handelincrement = (id) => {
+    dispatch(increment(id));
+  };
+
+  const handeldencrement = (id) => {
+    dispatch(decrement(id));
+  };
+
   const handelremove = (id) => {
-    console.log(id);
-    dispatch(removedata(id))
-  }
-  const totalprice = productdata.reduce((acc,v)=>acc +v.price*v.qyt,0)
+    dispatch(removedata(id));
+  };
+
+  const totalprice = productdata.reduce((acc, v) => acc + v.price * v.qyt, 0);
+  const totalDiscount = totalprice * (discount / 100);
+  const discountedTotal = totalprice - totalDiscount;
+  const total = discountedTotal + 3;
+
+  const handlecoupan = (data) => {
+    let flag = 0;
+    coupan.coupan.forEach((v) => {
+      const currentDate = new Date();
+      const expiryDate = new Date(v.expiryDate);
+
+      if (v.coupan === data.coupan && currentDate <= expiryDate) {
+        flag = 1;
+        const discountAmount = (totalprice * v.percentage) / 100;
+        setDiscount(v.percentage);
+      } else if (v.coupan === data.coupan && currentDate > expiryDate) {
+        flag = 2;
+      }
+    });
+
+    if (flag === 0) {
+      formik.setFieldError("coupan", "Invalid coupon");
+    } else if (flag === 1) {
+      formik.setFieldError("coupan", "Coupon applied Successfully");
+    } else if (flag === 2) {
+      formik.setFieldError("coupan", "Coupon Expired");
+    }
+  };
+
+  const coupanSchema = object({
+    coupan: string().required("Please Enter coupon"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      coupan: '',
+    },
+    validationSchema: coupanSchema,
+    onSubmit: (values) => {
+      handlecoupan(values);
+    },
+  });
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
+
+
   return (
     <div>
       <div>
@@ -64,7 +112,8 @@ function Cart(props) {
                 <tbody>
                   {
                     productdata.map((v) => (
-                      <tr>
+                      console.log(productdata),
+                      <tr key={v.id}>
                         <th scope="row">
                           <div className="d-flex align-items-center">
                             <img src={v.image} className="img-fluid me-5 rounded-circle" style={{ width: 80, height: 80 }} alt />
@@ -112,9 +161,29 @@ function Cart(props) {
               </table>
             </div>
             <div className="mt-5">
-              <input type="text" className="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code" />
-              <button className="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
-            </div>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="coupan"
+                className="border-0 border-bottom rounded me-5 py-3 mb-4"
+                placeholder="coupan Code"
+                value={values.coupan}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {
+                errors.coupan && touched.coupan ? <span>{errors.coupan}</span> : null
+              }
+
+              <button
+                className="btn border-secondary rounded-pill px-4 py-3 text-primary"
+                type="submit">
+                Apply coupan
+              </button>
+            </form>
+
+          </div>
+
             <div className="row g-4 justify-content-end">
               <div className="col-8" />
               <div className="col-sm-8 col-md-7 col-lg-6 col-xl-4">
@@ -124,8 +193,13 @@ function Cart(props) {
                     <h1 className="display-6 mb-4">Cart <span className="fw-normal">Total</span></h1>
                     <div className="d-flex justify-content-between mb-4">
                       <h5 className="mb-0 me-4">Subtotal:</h5>
-                      <p className="mb-0">$96.00</p>
+                      <p className="mb-0">${totalprice}</p>
                     </div>
+                    <div className="d-flex justify-content-between mb-4">
+                    <h5 className="mb-0 me-4">Discount:  {discount}%</h5>
+                    <p className="mb-0">{totalDiscount}</p>
+                  </div>
+
                     <div className="d-flex justify-content-between">
                       <h5 className="mb-0 me-4">Shipping</h5>
                       <div className>

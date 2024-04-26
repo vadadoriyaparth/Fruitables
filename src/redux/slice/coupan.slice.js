@@ -7,7 +7,6 @@ const initialState = {
     isLoading: false,
     error: null
 };
-
 export const addcoupon = createAsyncThunk(
     'add/couponuser',
     async (data) => {
