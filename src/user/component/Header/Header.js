@@ -44,7 +44,7 @@ function Header(props) {
             <NavLink to={"/Shop"} className="nav-item nav-link">Shop</NavLink>
             <NavLink to={"/Shop_de"} className="nav-item nav-link">Shop Detail</NavLink>
             <div className="nav-item dropdown">
-              <NavLink href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</NavLink>
+              <NavLink to={''} className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</NavLink>
               <div className="dropdown-menu m-0 bg-secondary rounded-0">
                 <NavLink to={"/Cart"} className="dropdown-item">Cart</NavLink>
                 <NavLink to={"/Cheackout"} className="dropdown-item">Chackout</NavLink>
@@ -56,17 +56,20 @@ function Header(props) {
           </div>
           <div className="d-flex m-2 me-0">
             <button className="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i className="fas fa-search text-primary" /></button>
-            <a href="#" className="position-relative me-4 my-auto">
+            <NavLink to={"/Cart"} href="#" className="position-relative me-4 my-auto">
               <i className="fa fa-shopping-bag fa-2x" />
               <NavLink to={"/Cart"} className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style={{top: '-5px', left: 15, height: 20, minWidth: 20}}>{totalQty}</NavLink>
-            </a>
+            </NavLink>
             <a href="#" className="my-auto">
               <i className="fas fa-user fa-2x" />
             </a>
+            
+            <h1  className="lightt">
             <LightModeIcon
-            size="large" 
+            
             onClick={handeleTheme}
             >chnge</LightModeIcon>
+            </h1>
           </div>
         </div>
       </nav>
