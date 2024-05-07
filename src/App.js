@@ -9,12 +9,16 @@ import { storeReduces } from './redux/Store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from './context/TheamContext';
+import { ProductssProvider } from './context/ProductssContext';
+import { ContectProvider } from './context/ContectContext';
 
 
 function App() {
   const { store, persistor } = storeReduces();
 
   return (
+
+<ContectProvider>
 
     <ThemeProvider>
       <Provider store={store}>
@@ -30,6 +34,7 @@ function App() {
 
       </Provider>
     </ThemeProvider>
+</ContectProvider>
   );
 }
 

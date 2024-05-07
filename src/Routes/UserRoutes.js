@@ -15,7 +15,7 @@ import Review from '../user/container/Review/Review';
 import { ThemeContext } from '../context/TheamContext';
 
 function UserRoutes(props) {
-    const themeContext=useContext   (ThemeContext);
+    const themeContext=useContext(ThemeContext);
     console.log(themeContext);
     return (
 

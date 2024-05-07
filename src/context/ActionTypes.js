@@ -1,1 +1,14 @@
 export const TOGGLE_THEME = "TOGGLE_THEME"
+export const PRODUCTSS_DELETE="PRODUCTSS_DELETE"
+
+
+// export const ADD_PRODUCTSS = 'ADD_PRODUCTSS';
+// export const GET_PRODUCTSS='GET_PRODUCTSS';
+// export const EDIT_PRODUCTSS = 'EDIT_PRODUCTSS';
+// export const DELETE_PRODUCTSS ='DELETE_PRODUCTSS';
+
+
+export const ADD_CONTECT = 'ADD_CONTECT';
+export const GET_CONTECT='GET_CONTECT';
+export const EDIT_CONTECT = 'EDIT_CONTECT';
+export const DELETE_CONTECT ='DELETE_CONTECT';
