@@ -4,6 +4,7 @@ import { decrement, increment, removedata } from '../../../redux/slice/cart.slic
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { applyCoupon, getcoupon } from '../../../redux/slice/coupan.slice';
+import Button from '../../component/UI/Button/Button';
 
 function Cart(props) {
   const products = useSelector(state => state.products);
@@ -216,8 +217,13 @@ function Cart(props) {
 
                   </div>
                   
-                  
-                  <button className="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                  <Button
+                  buttonDisabled={true}
+                  onClick={() => console.log('done')}
+                  >
+                  Proceed Checkout
+                  </Button>
+                  {/* <button className="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button> */}
                 </div>
               </div>
             </div>
