@@ -8,6 +8,15 @@ import { cartReducer } from "./cart.reducer";
 import cartSlice from "../slice/cart.slice";
 import counterSlice from "../slice/counter.slice";
 import coupanSlice from "../slice/coupan.slice";
+// import subcategorySlice from "../slice/subcategory.slice";
+import categorySlice from "../slice/category.slice";
+import { categoryReducer } from "./category.reducer";
+import subcategorySlice from "../slice/subcategory.slice";
+// import subcategorySlice from "../slice/subcategory.slice";
+// import { categoryReducer } from "./category.reducer";
+// import categorySlice from "../slice/category.slice";
+
+
 
 export const rootReducer = combineReducers({
     facilites : FacilitesReducer,
@@ -18,5 +27,7 @@ export const rootReducer = combineReducers({
     cart: cartReducer,
     counter:counterSlice,
     Addtocart:cartSlice,
-    coupan:coupanSlice
+    coupan:coupanSlice,
+    categories:categoryReducer,
+    subcategories: subcategorySlice,
 })

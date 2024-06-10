@@ -1,13 +1,6 @@
 {
   "Products": [
     {
-      "id": "1",
-      "name": "Grapes",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",
-      "price": 4.99,
-      "image": "img/fruite-item-5.jpg"
-    },
-    {
       "id": "2",
       "name": "Orange",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt ",

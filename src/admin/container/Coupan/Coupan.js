@@ -30,7 +30,7 @@ const Coupon = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setUpdate(false); // Reset the update state
+    setUpdate(false); // Reset the update state`
   };
   const coupon = useSelector(state => state.coupan);
 console.log(coupon);

@@ -28,3 +28,25 @@ export const ERROR_REVIEW = 'ERROR_REVIEW'
 export const ADD_CART = 'ADD_CART'
 export const GET_CART = 'GET_CART'
 
+
+// export const LODAING_CATEGORISE = 'CATEGORISE'
+// export const ADD_CATEGORISE = 'ADD_CATEGORISE';
+// export const GET_CATEGORISE='GET_CATEGORISE';
+// export const EDIT_CATEGORISE = 'EDIT_CATEGORISE';
+// export const DELETE_CATEGORISE ='DELETE_CATEGORISE';
+
+// export const LOADING_CATEGORY = 'LOADING_CATEGORY';
+// export const GET_CATEGORY = 'GET_CATEGORY';
+// export const ADD_CATEGORY = 'ADD_CATEGORY';
+// export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+// export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+// export const ERROR_CATEGORY = 'ERROR_CATEGORY';
+
+
+export const LOADING_CATEGORY = 'LOADING_CATEGORY';
+export const GET_CATEGORY = 'GET_CATEGORY';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const ERROR_CATEGORY = 'ERROR_CATEGORY';
+

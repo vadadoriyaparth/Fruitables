@@ -27,7 +27,7 @@ function App() {
           <Routes>
             <Route exact path='/*' element={<UserRoutes />} />
             <Route element={<PrivateRoutes />}>
-              <Route exact path='/admin/*' element={<AdminRoutes />} />
+              <Route exact path='/admin/*' element={<AdminRoutes />} /> 
             </Route>
           </Routes>
         </PersistGate>
