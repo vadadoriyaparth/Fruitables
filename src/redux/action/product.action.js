@@ -14,7 +14,7 @@ export const getProducts = () => async (dispatch) => {
   try {
     dispatch(productdataloding());
 
-    await axios.get(baseURL + 'Products')
+    await axios.get("http://localhost:5000/api/v1/products/list-products")
       .then((response) => {
         setTimeout(() => {
           dispatch({ type: GET_PRODUCT, payload: response.data })
@@ -34,9 +34,9 @@ export const getProducts = () => async (dispatch) => {
 export const addProducts = (data) => async (dispatch) => {
   
   try {
-    dispatch(productdataloding());
+    // dispatch(productdataloding());
 
-    await axios.post(baseURL + 'Products',data)
+    await axios.post("http://localhost:5000/api/v1/products/add-products",data)
       .then((response) => dispatch({type:ADD_PRODUCT,payload:response.data}))
       .catch((error) => console.log(error))
   } catch (error) {
@@ -50,7 +50,7 @@ export const DeleteProducts = (id) => async (dispatch) => {
   try {
     dispatch(productdataloding());
 
-    await axios.delete(baseURL + 'Products/'+id)
+    await axios.delete("http://localhost:5000/api/v1/products/delete-products/"+id)
       .then((response) => dispatch({type:DELETE_PRODUCT,payload:id}))
       .catch((error) => console.log(dispatch(productdataerror(error.message))
     ))
@@ -64,7 +64,7 @@ export const EditeProducts = (data) => async (dispatch) => {
   try {
     dispatch(productdataloding());
 
-    await axios.put(baseURL + 'Products/'+data.id,data)
+    await axios.put("http://localhost:5000/api/v1/products/update-products/"+data._id,data)
       .then((response) => dispatch({type:EDIT_PRODUCT,payload:data}))
       .catch((error) => console.log(error))
   } catch (error) {

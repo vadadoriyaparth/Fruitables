@@ -100,7 +100,8 @@ const adminlink = [
     // {title:"Newproduct",icon:<AppleIcon />, to: "/admin/Newproduct"},
     {title:"Productss",icon:<AppleIcon />, to: "/admin/Productss"},
     {title:"Contect",icon:<AppleIcon />, to: "/admin/Contect"},
-    {titel:"Subcategory",icon:<CategoryIcon/>, to:"/admin/Subcategory"}
+    {titel:"Subcategory",icon:<CategoryIcon/>, to:"/admin/Subcategory"},
+
 
 ]
 
