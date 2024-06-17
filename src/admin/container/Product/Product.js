@@ -1,9 +1,9 @@
-import * as React from 'react'; 
+import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';    
+import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -21,6 +21,7 @@ import { useState } from 'react';
 import { DELETE_PRODUCT } from '../../../redux/AcationType';
 import { getCategories } from '../../../redux/action/category.action';
 import { getSubData } from '../../../redux/slice/subcategory.slice';
+import { render } from '@testing-library/react';
 
 function Product() {
     const [open, setOpen] = React.useState(false);
@@ -28,8 +29,10 @@ function Product() {
     const [selectedCategory, setSelectedCategory] = useState('');
 
     const dispatch = useDispatch();
-    const products = useSelector(state => state.products);
+    const product = useSelector(state => state.products);
+    console.log(product.products);
     const categories = useSelector(state => state.categories);
+    console.log(categories);
     const subcategories = useSelector(state => state.subcategories);
 
     React.useEffect(() => {
@@ -45,26 +48,30 @@ function Product() {
     const handleClose = () => {
         setOpen(false);
         formik.resetForm(true);
+        setUpdate(null);
     };
 
     const productSchema = object({
         name: string().required(),
         description: string().required(),
-        price: number().required().positive(),
+        price: number().required(),
         category_id: string().required(),
         subcategory_id: string().required(),
+        image:string().required()
     });
 
     const handleEdit = (data) => {
-        formik.setValues(data);
         setOpen(true);
-        setUpdate(true);
+        formik.setValues(data);
+        setUpdate(data._id);
     };
 
     const handleDelete = (id) => {
         dispatch(DeleteProducts(id));
     };
+// const handlefile =()=>{
 
+// }
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -72,27 +79,34 @@ function Product() {
             price: '',
             category_id: '',
             subcategory_id: '',
+            image: ''
         },
         validationSchema: productSchema,
         onSubmit: (values, { resetForm }) => {
+            console.log(values);
+            console.log(update);
             if (update) {
-                dispatch(EditeProducts(values));
+                dispatch(EditeProducts({...values,_id:update}));
             } else {
                 dispatch(addProducts(values));
-            }   
+            }
             resetForm();
             handleClose();
         },
     });
 
-    const { handleSubmit, handleChange, handleBlur, values, touched, errors } = formik;
+    const { handleSubmit, handleChange, handleBlur,setFieldValue, values, touched, errors } = formik;
 
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
         formik.setFieldValue('category_id', event.target.value);
         formik.setFieldValue('subcategory_id', '');
     };
-
+    
+    const handleFile =(event)=>{
+        console.log("dfgh");
+        formik.setFieldValue('image',event.currentTarget.files[0]);
+        }
     const filteredSubcategories = subcategories.subcategories.filter(subcategory => subcategory.category_id === selectedCategory);
 
     const columns = [
@@ -101,6 +115,7 @@ function Product() {
             headerName: 'Category',
             width: 150,
             renderCell: (params) => {
+                console.log(params);
                 const category = categories.categories.find(v => v._id === params.row.category_id);
                 return category ? category.name : '';
             }
@@ -108,6 +123,19 @@ function Product() {
         { field: 'name', headerName: 'Name', width: 150 },
         { field: 'description', headerName: 'Description', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
+        { field: 'image', headerName: 'Image', width: 150 ,
+            renderCell:(params)=>{
+                console.log(params);
+                return(
+                    <img 
+                    src={params.row.image.url}
+                    alt='product'
+                    style={{width:'50px',height:'50px',objectFit:'cover'}}
+                    />
+                )
+            }
+        },
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -119,7 +147,7 @@ function Product() {
                         startIcon={<EditIcon />}
                     />
                     <Button
-                        onClick={() => handleDelete(params.row.id)}
+                        onClick={() => handleDelete(params.row._id)}
                         startIcon={<DeleteOutline />}
                     />
                 </>
@@ -129,11 +157,11 @@ function Product() {
 
     return (
         <div>
-            {products.isLoading ? (
+            {product.products.isLoading ? (
                 <p>Loading...</p>
             ) : (
                 <>
-                    <React.Fragment>
+                
                         <Button variant="outlined" onClick={handleClickOpen}>
                             Add Product
                         </Button>
@@ -141,26 +169,26 @@ function Product() {
                             <DialogTitle>Product</DialogTitle>
                             <form onSubmit={handleSubmit}>
                                 <DialogContent>
-                                <FormControl fullWidth variant="standard" margin="dense">
+                                    <FormControl fullWidth variant="standard" margin="dense">
                                         <InputLabel id="category-label">Category</InputLabel>
                                         <Select
                                             labelId="category-label"
-                                            id="category_id"
+                                            id="category-label"
                                             name="category_id"
                                             value={values.category_id}
                                             onChange={handleCategoryChange}
                                             onBlur={handleBlur}
                                             error={errors.category_id && touched.category_id}
                                         >
-                                            {categories.categories.map((category) => (
-                                                <MenuItem key={category._id} value={category._id}>
-                                                    {category.name}
+                                            {categories.categories.map((v) => (
+                                                <MenuItem key={v._id} value={v._id}>
+                                                    {v.name}
                                                 </MenuItem>
                                             ))}
                                         </Select>
-                                        {errors.category_id && touched.category_id && (
+                                        {/* {errors.category_id && touched.category_id && (
                                             <div>{errors.category_id}</div>
-                                        )}
+                                        )} */}
                                     </FormControl>
                                     <FormControl fullWidth variant="standard" margin="dense">
                                         <InputLabel id="subcategory-label">Subcategory</InputLabel>
@@ -226,7 +254,7 @@ function Product() {
                                         error={errors.price && touched.price}
                                         helperText={errors.price && touched.price ? errors.price : ''}
                                     />
-                            
+                                    <input type="file" name="image" onChange={handleFile} />
                                     <DialogActions>
                                         <Button onClick={handleClose}>Cancel</Button>
                                         <Button type="submit">{update ? 'Update' : 'Add'}</Button>
@@ -236,7 +264,8 @@ function Product() {
                         </Dialog>
                         <div style={{ height: 400, width: '100%' }}>
                             <DataGrid
-                                rows={products.products}
+                                getRowId={(row) => row._id}
+                                rows={product.products}
                                 columns={columns}
                                 initialState={{
                                     pagination: {
@@ -245,9 +274,10 @@ function Product() {
                                 }}
                                 pageSizeOptions={[5, 10]}
                                 checkboxSelection
+
                             />
                         </div>
-                    </React.Fragment>
+                    
                 </>
             )}
         </div>

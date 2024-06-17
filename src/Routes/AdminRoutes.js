@@ -15,6 +15,7 @@ import { useContext } from 'react';
 import { ProductssContext } from '../context/ProductssContext';
 import Contect from '../admin/container/Contect/Contect';
 import Subcategory from '../admin/container/Subcategory/Subcategory';
+import Products from '../admin/container/Producs/Products';
 
 
 function AdminRoutes(props) {
@@ -34,6 +35,8 @@ function AdminRoutes(props) {
                         <Route exact path="/Productss" element={<Productss />} />
                         <Route exact path="/Contect" element={<Contect/>} />
                         <Route exact path="/Subcategory" element={<Subcategory/>} />
+                        <Route exact path="/Products" element={<Products/>} />
+
 
 
                     </Routes>

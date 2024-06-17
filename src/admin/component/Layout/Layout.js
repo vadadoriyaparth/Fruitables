@@ -101,6 +101,8 @@ const adminlink = [
     {title:"Productss",icon:<AppleIcon />, to: "/admin/Productss"},
     {title:"Contect",icon:<AppleIcon />, to: "/admin/Contect"},
     {titel:"Subcategory",icon:<CategoryIcon/>, to:"/admin/Subcategory"},
+    {titel:"Products",icon:<CategoryIcon/>, to:"/admin/Products"},
+
 
 
 ]

@@ -12,6 +12,7 @@ import coupanSlice from "../slice/coupan.slice";
 import categorySlice from "../slice/category.slice";
 import { categoryReducer } from "./category.reducer";
 import subcategorySlice from "../slice/subcategory.slice";
+import { productReducer } from "./products.reducer";
 // import subcategorySlice from "../slice/subcategory.slice";
 // import { categoryReducer } from "./category.reducer";
 // import categorySlice from "../slice/category.slice";
@@ -30,4 +31,5 @@ export const rootReducer = combineReducers({
     coupan:coupanSlice,
     categories:categoryReducer,
     subcategories: subcategorySlice,
+    // product: productReducer,
 })
