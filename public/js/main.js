@@ -149,3 +149,22 @@
 
 })(jQuery);
 
+
+document.querySelectorAll('.dropdown-hover, .dropdown-hover-all .dropdown').forEach(function (dd) {
+    dd.addEventListener('mouseenter', function (e) {
+        let toggle = e.target.querySelector(':scope>[data-bs-toggle="dropdown"]');
+        if (!toggle.classList.contains('show')) {
+            $bs.Dropdown.getOrCreateInstance(toggle).toggle();
+            dd.classList.add(CLASS_NAME);
+            $bs.Dropdown.clearMenus();
+        }
+    });
+    dd.addEventListener('mouseleave', function (e) {
+        let toggle = e.target.querySelector(':scope>[data-bs-toggle="dropdown"]');
+        if (toggle.classList.contains('show')) {
+            $bs.Dropdown.getOrCreateInstance(toggle).toggle();
+        }
+    });
+})(bootstrap);
+
+

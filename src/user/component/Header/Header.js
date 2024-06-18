@@ -7,6 +7,11 @@ function Header(props) {
   const cart = useSelector((state) => state.Addtocart);
   console.log(cart);
 
+  const categories = useSelector(state => state.categories);
+  console.log(categories);
+  const subcategories = useSelector(state => state.subcategories);
+  console.log(subcategories);
+
   const totalQty = cart.cart.reduce((acc, v) => acc + v.qyt, 0);
 
   const themeContext = useContext(ThemeContext);
@@ -15,6 +20,7 @@ function Header(props) {
   const handeleTheme = () => {
     themeContext.toggleTheme(themeContext.theme)
   }
+
   return (
     <div>
       {/* Navbar start */}
@@ -42,7 +48,27 @@ function Header(props) {
               <div className="navbar-nav mx-auto">
                 <NavLink to={"/"} className="nav-item nav-link active">Home</NavLink>
                 <NavLink to={"/Shop"} className="nav-item nav-link">Shop</NavLink>
-                <NavLink to={"/Shop_de"} className="nav-item nav-link">Shop Detail</NavLink>
+                <div class="d-flex ">
+                    <div class="dropdown">
+                      <a href="#" className="nav-link dropdown-toggle" id="dropdownMenuButton222" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                      <div class="dropdown-menu m-0 bg-light rounded-2 border-0" aria-labelledby="dropdownMenuButton222">
+                        {
+                          categories.categories.map((n) => (
+                            <div class="dropdown dropend">
+                              <a class="dropdown-item dropdown-toggle" href="#" id="dropdown-layouts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{n.name}</a>
+
+                              <div class="dropdown-menu m-0 bg-light rounded-2 border-0" aria-labelledby="dropdown-layouts">
+                                {subcategories.subcategories.map((v) =>
+                                  v.category_id == n._id ?
+                                    <a class="dropdown-item" href="#">{v.name}</a> : ''
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                    </div>
+                {/* <NavLink to={"/Shop_de"} className="nav-item nav-link">Shop Detail</NavLink> */}
                 <div className="nav-item dropdown">
                   <NavLink to={''} className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</NavLink>
                   <div className="dropdown-menu m-0 bg-secondary rounded-0">

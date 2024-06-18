@@ -6,8 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getfesellity } from '../../../redux/action/fesellity.action';
 import { ThemeContext } from '../../../context/TheamContext';
 import { colors } from '@mui/material';
+import { getProducts } from '../../../redux/action/product.action';
+import { getCategories } from '../../../redux/action/category.action';
+import { getSubData } from '../../../redux/slice/subcategory.slice';
 
 function Home(props) {
+
 let vegetable_carousel={
     autoplay: true,
     smartSpeed: 1500,
@@ -72,12 +76,21 @@ let vegetable_carousel={
     }
     const fesellity = useSelector(state=> state.facilites);
     console.log(fesellity);
+  // const product = useSelector(state => state.products);
+  // console.log(product.products);
+  const categories = useSelector(state => state.categories);
+  console.log(categories);
+  const subcategories = useSelector(state => state.subcategories);
+  console.log(subcategories);
 
     const dispatch=useDispatch();
     const themeContext=useContext(ThemeContext);
     console.log(themeContext);
     useEffect(() => {
       dispatch(getfesellity())
+      // dispatch(getProducts());
+      dispatch(getCategories());
+      dispatch(getSubData());
     },[])
     return (
      <div>
