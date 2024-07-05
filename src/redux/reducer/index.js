@@ -13,6 +13,9 @@ import categorySlice from "../slice/category.slice";
 import { categoryReducer } from "./category.reducer";
 import subcategorySlice from "../slice/subcategory.slice";
 import { productReducer } from "./products.reducer";
+import productSlice from "../slice/product.slice";
+import variantSlice from "../slice/variant.slice";
+// import ProductSlice from "../slice/Product.slice";
 // import subcategorySlice from "../slice/subcategory.slice";
 // import { categoryReducer } from "./category.reducer";
 // import categorySlice from "../slice/category.slice";
@@ -21,7 +24,7 @@ import { productReducer } from "./products.reducer";
 
 export const rootReducer = combineReducers({
     facilites : FacilitesReducer,
-    products:productsReducer,
+    // product:productsReducer,
     shop:shopReducer,
     shopdi:shopdiReducer,
     review:reviewReducer,
@@ -31,5 +34,6 @@ export const rootReducer = combineReducers({
     coupan:coupanSlice,
     categories:categoryReducer,
     subcategories: subcategorySlice,
-    // product: productReducer,
+    products: productSlice,
+    variants:variantSlice
 })

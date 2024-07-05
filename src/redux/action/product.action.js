@@ -66,16 +66,21 @@ export const DeleteProducts = (id) => async (dispatch) => {
 
   }
 }
-export const EditeProducts = (data) => async (dispatch) => {
+export const editProducts = (data) => async (dispatch) => {
+  console.log(data);
+
   try {
     dispatch(productdataloding());
 
-    await axios.put("http://localhost:5000/api/v1/products/update-products/"+data._id,data)
-      .then((response) => dispatch({type:EDIT_PRODUCT,payload:data}))
-      .catch((error) => console.log(error))
-  } catch (error) {
-    console.log(dispatch(productdataerror(error.message))
-  );
+    const response = await axios.put(`http://localhost:5000/api/v1/products/update-products/${data._id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    console.log(response.data.data);
+    dispatch({ type: EDIT_PRODUCT, payload: response.data });
 
+  } catch (error) {
+    console.log(dispatch(productdataerror(error.message)));
   }
 }

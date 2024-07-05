@@ -50,7 +50,7 @@ export const productsReducer = (state = initialState, action) => {
                 products: state.products.map((v) => {
 
                     if (v._id !== action.payload._id) {
-                        return action.payload
+                        return action.payload.data
                     } else {
                         return v;
                     }

@@ -97,14 +97,11 @@ const adminlink = [
     {title:"Fesellity",icon:<CategoryIcon />, to: "/admin/Fesellity"},
     {title:"Counter",icon:<CategoryIcon />, to: "/admin/Counter"},
     {title:"Coupan",icon:<CategoryIcon />, to: "/admin/Coupan"},
-    // {title:"Newproduct",icon:<AppleIcon />, to: "/admin/Newproduct"},
+    {title:"Variant",icon:<AppleIcon />, to: "/admin/Variant"},
     {title:"Productss",icon:<AppleIcon />, to: "/admin/Productss"},
     {title:"Contect",icon:<AppleIcon />, to: "/admin/Contect"},
     {titel:"Subcategory",icon:<CategoryIcon/>, to:"/admin/Subcategory"},
     {titel:"Products",icon:<CategoryIcon/>, to:"/admin/Products"},
-
-
-
 ]
 
 export default function Layout({children}) {

@@ -16,6 +16,7 @@ import { ProductssContext } from '../context/ProductssContext';
 import Contect from '../admin/container/Contect/Contect';
 import Subcategory from '../admin/container/Subcategory/Subcategory';
 import Products from '../admin/container/Producs/Products';
+import Variant from '../admin/container/Variant/Variant';
 
 
 function AdminRoutes(props) {
@@ -36,6 +37,8 @@ function AdminRoutes(props) {
                         <Route exact path="/Contect" element={<Contect/>} />
                         <Route exact path="/Subcategory" element={<Subcategory/>} />
                         <Route exact path="/Products" element={<Products/>} />
+                        <Route exact path="/Variant" element={<Variant/>} />
+
 
 
 
