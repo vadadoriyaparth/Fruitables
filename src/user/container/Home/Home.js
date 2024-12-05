@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getfesellity } from '../../../redux/action/fesellity.action';
+import { ThemeContext } from '../../../context/TheamContext';
+import { colors } from '@mui/material';
+import { getProducts } from '../../../redux/action/product.action';
+import { getCategories } from '../../../redux/action/category.action';
+import { getSubData } from '../../../redux/slice/subcategory.slice';
 
 function Home(props) {
+
 let vegetable_carousel={
     autoplay: true,
     smartSpeed: 1500,
@@ -66,10 +74,29 @@ let vegetable_carousel={
             }
         }
     }
+    const fesellity = useSelector(state=> state.facilites);
+    console.log(fesellity);
+  // const product = useSelector(state => state.products);
+  // console.log(product.products);
+  const categories = useSelector(state => state.categories);
+  console.log(categories);
+  const subcategories = useSelector(state => state.subcategories);
+  console.log(subcategories);
+
+    const dispatch=useDispatch();
+    const themeContext=useContext(ThemeContext);
+    console.log(themeContext);
+    useEffect(() => {
+      dispatch(getfesellity())
+      // dispatch(getProducts());
+      dispatch(getCategories());
+      dispatch(getSubData());
+    },[])
     return (
      <div>
   {/* Hero Start */}
-  <div className="container-fluid py-5 mb-5 hero-header">
+  <div className={`container-fluid py-5 mb-5 hero-header ${themeContext.theme} `}>
+
     <div className="container py-5">
       <div className="row g-5 align-items-center">
         <div className="col-md-12 col-lg-7">
@@ -110,50 +137,23 @@ let vegetable_carousel={
   <div className="container-fluid featurs py-5">
     <div className="container py-5">
       <div className="row g-4">
-        <div className="col-md-6 col-lg-3">
-          <div className="featurs-item text-center rounded bg-light p-4">
-            <div className="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-              <i className="fas fa-car-side fa-3x text-white" />
-            </div>
-            <div className="featurs-content text-center">
-              <h5>Free Shipping</h5>
-              <p className="mb-0">Free on order over $300</p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6 col-lg-3">
-          <div className="featurs-item text-center rounded bg-light p-4">
-            <div className="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-              <i className="fas fa-user-shield fa-3x text-white" />
-            </div>
-            <div className="featurs-content text-center">
-              <h5>Security Payment</h5>
-              <p className="mb-0">100% security payment</p>
+        {
+          fesellity.facilites.map((v)=>(
+            <div className="col-md-6 col-lg-3">
+            <div className="featurs-item text-center rounded bg-light p-4">
+              <div className="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                <i className="fas fa-car-side fa-3x text-white" />
+              </div>
+              <div className="featurs-content text-center">
+                <h5>{v.name}</h5>
+                <p className="mb-0">{v.discription}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-6 col-lg-3">
-          <div className="featurs-item text-center rounded bg-light p-4">
-            <div className="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-              <i className="fas fa-exchange-alt fa-3x text-white" />
-            </div>
-            <div className="featurs-content text-center">
-              <h5>30 Day Return</h5>
-              <p className="mb-0">30 day money guarantee</p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6 col-lg-3">
-          <div className="featurs-item text-center rounded bg-light p-4">
-            <div className="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-              <i className="fa fa-phone-alt fa-3x text-white" />
-            </div>
-            <div className="featurs-content text-center">
-              <h5>24/7 Support</h5>
-              <p className="mb-0">Support every time fast</p>
-            </div>
-          </div>
-        </div>
+        
+          ))
+        }
+       
       </div>
     </div>
   </div>
@@ -537,7 +537,7 @@ let vegetable_carousel={
               <img src="img/featur-2.jpg" className="img-fluid rounded-top w-100" alt />
               <div className="px-4 rounded-bottom">
                 <div className="service-content bg-light text-center p-4 rounded">
-                  <h5 className="text-primary">Tasty Fruits</h5>
+                  <h3 className="text-primary">Tasty Fruits</h3>
                   <h3 className="mb-0">Free delivery</h3>
                 </div>
               </div>
@@ -698,7 +698,7 @@ let vegetable_carousel={
           <div className="position-relative">
             <img src="img/baner-1.png" className="img-fluid w-100 rounded" alt />
             <div className="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style={{width: 140, height: 140, top: 0, left: 0}}>
-              <h1 style={{fontSize: 100}}>1</h1>
+              <h3 style={{fontSize: 100}}>1</h3>
               <div className="d-flex flex-column">
                 <span className="h2 mb-0">50$</span>
                 <span className="h4 text-muted mb-0">kg</span>
@@ -924,29 +924,29 @@ let vegetable_carousel={
           <div className="col-md-6 col-lg-6 col-xl-3">
             <div className="counter bg-white rounded p-5">
               <i className="fa fa-users text-secondary" />
-              <h4>satisfied customers</h4>
-              <h1>1963</h1>
+              <h3>satisfied customers</h3>
+              <h3>1963</h3>
             </div>
           </div>
           <div className="col-md-6 col-lg-6 col-xl-3">
             <div className="counter bg-white rounded p-5">
               <i className="fa fa-users text-secondary" />
-              <h4>quality of service</h4>
-              <h1>99%</h1>
+              <h3>quality of service</h3>
+              <h3>99%</h3>
             </div>
           </div>
           <div className="col-md-6 col-lg-6 col-xl-3">
             <div className="counter bg-white rounded p-5">
               <i className="fa fa-users text-secondary" />
-              <h4>quality certificates</h4>
-              <h1>33</h1>
+              <h3>quality certificates</h3>
+              <h3>33</h3>
             </div>
           </div>
           <div className="col-md-6 col-lg-6 col-xl-3">
             <div className="counter bg-white rounded p-5">
               <i className="fa fa-users text-secondary" />
-              <h4>Available Products</h4>
-              <h1>789</h1>
+              <h3>Available Products</h3>
+              <h3>789</h3>
             </div>
           </div>
         </div>
@@ -966,16 +966,16 @@ let vegetable_carousel={
           <div className="position-relative">
             <i className="fa fa-quote-right fa-2x text-secondary position-absolute" style={{bottom: 30, right: 0}} />
             <div className="mb-4 pb-4 border-bottom border-secondary">
-              <p className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-              </p>
+              <h3 className="mb-0"  >Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+              </h3>
             </div>
             <div className="d-flex align-items-center flex-nowrap">
               <div className="bg-secondary rounded">
                 <img src="img/testimonial-1.jpg" className="img-fluid rounded" style={{width: 100, height: 100}} alt />
               </div>
               <div className="ms-4 d-block">
-                <h4 className="text-dark">Client Name</h4>
-                <p className="m-0 pb-3">Profession</p>
+                <h3 className="text-dark">Client Name</h3>
+                <h3 className="m-0 pb-3">Profession</h3>
                 <div className="d-flex pe-5">
                   <i className="fas fa-star text-primary" />
                   <i className="fas fa-star text-primary" />
@@ -991,16 +991,16 @@ let vegetable_carousel={
           <div className="position-relative">
             <i className="fa fa-quote-right fa-2x text-secondary position-absolute" style={{bottom: 30, right: 0}} />
             <div className="mb-4 pb-4 border-bottom border-secondary">
-              <p className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-              </p>
+              <h3 className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+              </h3>
             </div>
             <div className="d-flex align-items-center flex-nowrap">
               <div className="bg-secondary rounded">
                 <img src="img/testimonial-1.jpg" className="img-fluid rounded" style={{width: 100, height: 100}} alt />
               </div>
               <div className="ms-4 d-block">
-                <h4 className="text-dark">Client Name</h4>
-                <p className="m-0 pb-3">Profession</p>
+                <h3 className="text-dark">Client Name</h3>
+                <h3 className="m-0 pb-3">Profession</h3>
                 <div className="d-flex pe-5">
                   <i className="fas fa-star text-primary" />
                   <i className="fas fa-star text-primary" />
@@ -1016,16 +1016,16 @@ let vegetable_carousel={
           <div className="position-relative">
             <i className="fa fa-quote-right fa-2x text-secondary position-absolute" style={{bottom: 30, right: 0}} />
             <div className="mb-4 pb-4 border-bottom border-secondary">
-              <p className="mb-0">Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-              </p>
+              <h3 className="mb-0">Lorem Ih3sum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+              </h3>
             </div>
             <div className="d-flex align-items-center flex-nowrap">
               <div className="bg-secondary rounded">
                 <img src="img/testimonial-1.jpg" className="img-fluid rounded" style={{width: 100, height: 100}} alt />
               </div>
               <div className="ms-4 d-block">
-                <h4 className="text-dark">Client Name</h4>
-                <p className="m-0 pb-3">Profession</p>
+                <h3 className="text-dark">Client Name</h3>
+                <h3 className="m-0 pb-3">Profession</h3>
                 <div className="d-flex pe-5">
                   <i className="fas fa-star text-primary" />
                   <i className="fas fa-star text-primary" />
